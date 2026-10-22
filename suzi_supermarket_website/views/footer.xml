@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <template id="footer" name="Suzi's editable footer">
+        <div id="footer" class="sz-footer oe_structure oe_structure_solo">
+            <section t-if="website.suzi_newsletter_id" class="sz-newsletter s_newsletter_block s_newsletter_list" t-att-data-list-id="website.suzi_newsletter_id.id" data-snippet="s_newsletter_block" data-name="Newsletter">
+                <div class="sz-container sz-newsletter-grid">
+                    <div><span class="sz-eyebrow">A LITTLE SOMETHING IN YOUR INBOX</span><h2>Good things. Great finds.</h2><p>Sign up for news, new arrivals, and offers from Suzi's.</p></div>
+                    <div>
+                        <div class="s_newsletter_subscribe_form s_newsletter_list js_subscribe" data-vxml="001" t-att-data-list-id="website.suzi_newsletter_id.id" data-name="Newsletter Form">
+                            <div class="js_subscribed_wrap d-none" role="status"><p>Thanks for subscribing!</p></div>
+                            <div class="js_subscribe_wrap"><div class="input-group">
+                                <input type="email" name="email" class="s_newsletter_subscribe_form_input js_subscribe_value form-control" placeholder="Your email address" aria-label="Email address for Suzi's newsletter" autocomplete="email"/>
+                                <button type="button" class="js_subscribe_btn o_submit btn btn-primary">Subscribe <i class="fa fa-arrow-right" aria-hidden="true"/></button>
+                            </div></div>
+                        </div>
+                        <small>By subscribing, you agree to receive news and offers. Unsubscribe anytime.</small>
+                    </div>
+                </div>
+            </section>
+            <section class="sz-footer-main s_text_block" data-snippet="s_text_block" data-name="Footer">
+                <div class="sz-container sz-footer-grid">
+                    <div class="sz-footer-brand"><img src="/suzi_supermarket_website/static/src/img/suzi-logo.svg" width="124" height="124" alt="Suzi's Supermarket, Valsayn" loading="lazy"/><p>Everyday essentials.<br/>A little closer to home.</p></div>
+                    <div><h3>Explore Suzi's</h3><a href="/">Home</a><a href="/shop">Shop all products</a><a href="/suzi-home#sz-categories">Shop by category</a><a href="/suzi-home#sz-promotions">Promotions</a><a href="/suzi-home#sz-about">About us</a></div>
+                    <div><h3>Here to help</h3><a href="/contactus">Contact us</a><a href="/my/home">My account</a><a href="/my/orders">My orders</a><a href="/shop/cart">Shopping cart</a></div>
+                    <div><h3>Your neighbourhood store</h3><p><i class="fa fa-map-marker" aria-hidden="true"/> Valsayn<br/>Trinidad &amp; Tobago</p><t t-call="suzi_supermarket_website.phone"/><p class="sz-footer-note">Call us for opening hours, product availability, and directions.</p></div>
+                </div>
+                <div class="sz-container sz-copyright"><span>© <t t-out="datetime.datetime.now().year"/> Suzi's Supermarket. All rights reserved.</span><span>Made for our community.</span></div>
+            </section>
+        </div>
+    </template>
+</odoo>

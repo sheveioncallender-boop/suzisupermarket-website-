@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="phone" name="Suzi's phone number">
+        <a href="tel:+18683777711" class="sz-phone" aria-label="Call Suzi's Supermarket on 377-7711">
+            <i class="fa fa-phone" aria-hidden="true"/> <span class="o_force_ltr">377-7711</span>
+        </a>
+    </template>
+    <template id="announcement" name="Suzi's announcement bar">
+        <div class="sz-topbar"><div class="sz-container sz-topbar-inner">
+            <span>Your neighbourhood supermarket <span class="sz-topbar-location">· Valsayn, Trinidad</span></span>
+            <t t-call="suzi_supermarket_website.phone"/>
+        </div></div>
+    </template>
+    <template id="native_phone" inherit_id="website.header_text_element" name="Suzi's native header contact" priority="80">
+        <xpath expr="//li" position="replace">
+            <li t-if="website.suzi_branding" t-attf-class="#{_item_class}">
+                <div t-attf-class="s_text_block #{_div_class}"><t t-call="suzi_supermarket_website.phone"/></div>
+            </li>
+            <t t-else="">$0</t>
+        </xpath>
+    </template>
+    <template id="layout" inherit_id="website.layout" name="Suzi's native website branding" priority="99">
+        <xpath expr="//div[@id='wrapwrap']" position="attributes">
+            <attribute name="t-attf-class" add="#{'sz-website' if website.suzi_branding else ''}" separator=" "/>
+        </xpath>
+        <xpath expr="//header/*[1]" position="before">
+            <t t-if="website.suzi_branding" t-call="suzi_supermarket_website.announcement"/>
+        </xpath>
+        <xpath expr="//footer/div[@id='footer']" position="replace">
+            <t t-if="website.suzi_branding" t-call="suzi_supermarket_website.footer"/>
+            <t t-else="">$0</t>
+        </xpath>
+        <xpath expr="//footer/div[hasclass('o_footer_copyright')]" position="attributes">
+            <attribute name="t-if">not no_copyright and not website.suzi_branding</attribute>
+        </xpath>
+    </template>
+    <template id="contact_details" inherit_id="website.contactus" name="Suzi's contact details" priority="80">
+        <xpath expr="//div[@id='wrap']/*[1]" position="replace">
+            <section t-if="website.suzi_branding" class="sz-contact-strip s_text_block" data-snippet="s_text_block" data-name="Suzi's Contact">
+                <div class="sz-container"><div><span class="sz-eyebrow">LET'S TALK</span><h1>Contact Suzi's Supermarket</h1><p>Valsayn, Trinidad &amp; Tobago. Have a question about a product? Give us a call.</p></div><t t-call="suzi_supermarket_website.phone"/></div>
+            </section>
+            <t t-else="">$0</t>
+        </xpath>
+        <xpath expr="//div[hasclass('col-lg-4')]" position="replace">
+            <div t-if="website.suzi_branding" class="col-lg-4 offset-lg-1 mt-4 mt-lg-0">
+                <h3>Suzi's Supermarket</h3><p>Valsayn, Trinidad &amp; Tobago</p>
+                <t t-call="suzi_supermarket_website.phone"/>
+                <p class="mt-3">Call for opening hours, directions, or product enquiries.</p>
+            </div>
+            <t t-else="">$0</t>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <template id="homepage" name="Suzi's Supermarket Home">
+        <t t-call="website.layout" pageName.f="homepage">
+            <t t-set="additional_title">Suzi's Supermarket | Valsayn</t>
+            <div id="wrap" class="oe_structure sz-home">
+                <section class="s_carousel_wrapper sz-hero-wrapper p-0" data-snippet="s_carousel" data-name="Suzi's Banners" data-vxml="001" data-vcss="001">
+                    <div id="suziHero" class="s_carousel carousel slide sz-hero" data-bs-ride="false" data-bs-interval="false" aria-label="Suzi's featured collections" aria-roledescription="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active sz-slide" data-name="Everyday Essentials">
+                                <img class="sz-hero-photo" src="/suzi_supermarket_website/static/src/img/hero-fresh-groceries.webp" alt="A grocery bag filled with colourful fresh produce" width="1536" height="1024" fetchpriority="high" decoding="async"/>
+                                <div class="sz-container sz-hero-content"><div class="sz-hero-copy">
+                                    <span class="sz-eyebrow"><i class="fa fa-map-marker" aria-hidden="true"/> YOUR NEIGHBOURHOOD SUPERMARKET · VALSAYN</span>
+                                    <h1>Good food.<br/>Great value.<br/><span>That's Suzi's.</span></h1>
+                                    <p>From the everyday essentials to your family's favourites. Fill your basket with a little goodness.</p>
+                                    <div class="sz-actions"><a class="btn btn-primary sz-button" href="/shop">Shop the essentials <i class="fa fa-arrow-right" aria-hidden="true"/></a><a class="sz-text-link" href="#sz-categories">Explore categories</a></div>
+                                </div></div>
+                            </div>
+                            <div class="carousel-item sz-slide sz-slide-split" data-name="Pantry Favourites">
+                                <img class="sz-hero-photo" src="/suzi_supermarket_website/static/src/img/cat_pantry_hd.webp" alt="A selection of groceries and pantry essentials" width="1200" height="900" loading="lazy" decoding="async"/>
+                                <div class="sz-container sz-hero-content"><div class="sz-hero-copy"><span class="sz-eyebrow">FOR THE WAY YOU COOK</span><h2>A well-stocked<br/>pantry.<br/><span>A happy home.</span></h2><p>Make room for your everyday favourites. Explore groceries for breakfast, dinner, and everything in between.</p><div class="sz-actions"><a href="/shop" class="btn btn-primary sz-button">Fill your pantry <i class="fa fa-arrow-right" aria-hidden="true"/></a></div></div></div>
+                            </div>
+                            <div class="carousel-item sz-slide sz-slide-split" data-name="Fresh Inspiration">
+                                <img class="sz-hero-photo" src="/suzi_supermarket_website/static/src/img/promo_savings_hd.webp" alt="A colourful display of fruit and vegetables" width="1600" height="1200" loading="lazy" decoding="async"/>
+                                <div class="sz-container sz-hero-content"><div class="sz-hero-copy"><span class="sz-eyebrow">A LITTLE COLOUR FOR YOUR TABLE</span><h2>Fresh ideas.<br/>Everyday<br/><span>inspiration.</span></h2><p>Discover something delicious for your next meal. Your next good find starts at Suzi's.</p><div class="sz-actions"><a href="/shop" class="btn btn-primary sz-button">Discover the selection <i class="fa fa-arrow-right" aria-hidden="true"/></a></div></div></div>
+                            </div>
+                        </div>
+                        <div class="sz-hero-nav o_not_editable" contenteditable="false">
+                            <button type="button" class="sz-hero-arrow" data-bs-target="#suziHero" data-bs-slide="prev" aria-label="Previous banner"><i class="fa fa-angle-left" aria-hidden="true"/></button>
+                            <div class="carousel-indicators"><button type="button" data-bs-target="#suziHero" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Everyday essentials banner"/><button type="button" data-bs-target="#suziHero" data-bs-slide-to="1" aria-label="Pantry favourites banner"/><button type="button" data-bs-target="#suziHero" data-bs-slide-to="2" aria-label="Fresh inspiration banner"/></div>
+                            <button type="button" class="sz-hero-arrow" data-bs-target="#suziHero" data-bs-slide="next" aria-label="Next banner"><i class="fa fa-angle-right" aria-hidden="true"/></button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="sz-benefits-section s_text_block" data-snippet="s_text_block" data-name="Why Suzi's">
+                    <div class="sz-container sz-benefits">
+                        <div><i class="fa fa-shopping-basket" aria-hidden="true"/><div><strong>Everyday essentials</strong><p>For your home and family</p></div></div>
+                        <div><i class="fa fa-heart-o" aria-hidden="true"/><div><strong>Family favourites</strong><p>Find a little of what you love</p></div></div>
+                        <div><i class="fa fa-smile-o" aria-hidden="true"/><div><strong>Friendly service</strong><p>A familiar face, a helping hand</p></div></div>
+                        <div><i class="fa fa-map-marker" aria-hidden="true"/><div><strong>Right here in Valsayn</strong><p>Your neighbourhood supermarket</p></div></div>
+                    </div>
+                </section>
+
+                <section id="sz-categories" class="sz-section s_text_block" data-snippet="s_text_block" data-name="Shop by Category">
+                    <div class="sz-container"><div class="sz-section-heading"><div><span class="sz-eyebrow">FIND YOUR EVERYDAY</span><h2>What's on your list?</h2></div><a href="/shop" class="sz-text-link">Shop all products <i class="fa fa-arrow-right" aria-hidden="true"/></a></div>
+                        <div t-if="categories" class="sz-category-grid o_not_editable">
+                            <a t-foreach="categories" t-as="category" t-att-href="'/shop/category/%s' % request.env['ir.http']._slug(category)" class="sz-category">
+                                <div class="sz-category-photo"><img t-att-src="'/web/image/product.public.category/%s/image_1024' % category.id if category.image_128 else '/suzi_supermarket_website/static/src/img/cat_pantry_hd.webp'" t-att-alt="category.name" width="320" height="320" loading="lazy" decoding="async"/></div>
+                                <strong t-out="category.name"/><span>Explore <i class="fa fa-angle-right" aria-hidden="true"/></span>
+                            </a>
+                        </div>
+                        <p t-elif="not can_shop" class="sz-empty"><a href="/web/login?redirect=/shop">Sign in to explore our selection.</a></p>
+                        <p t-else="" class="sz-empty">Explore our latest selection in the shop.</p>
+                    </div>
+                </section>
+
+                <section id="sz-promotions" class="sz-section sz-promos-section s_text_block" data-snippet="s_text_block" data-name="Promotions">
+                    <div class="sz-container sz-promo-grid">
+                        <div class="sz-promo sz-promo-green"><img src="/suzi_supermarket_website/static/src/img/promo_savings_hd.webp" alt="Fresh produce selection" loading="lazy" width="1600" height="1200"/><div class="sz-promo-copy"><span class="sz-eyebrow">GOOD FINDS START HERE</span><h2>A little more<br/>for your basket.</h2><p>Explore the latest products and everyday favourites.</p><a href="/shop" class="btn sz-button sz-button-light">Browse the shop <i class="fa fa-arrow-right" aria-hidden="true"/></a></div></div>
+                        <div class="sz-promo sz-promo-cream"><img src="/suzi_supermarket_website/static/src/img/cat_snacks_hd.webp" alt="Sweet treats and snacks" loading="lazy" width="1200" height="800"/><div class="sz-promo-copy"><span class="sz-eyebrow">MAKE TIME FOR A TREAT</span><h2>The little things<br/>you love.</h2><p>Something for the lunchbox. Something just for you.</p><a href="/shop" class="sz-text-link">Find your favourites <i class="fa fa-arrow-right" aria-hidden="true"/></a></div></div>
+                    </div>
+                </section>
+
+                <section id="sz-products" class="sz-section sz-products-section s_text_block" data-snippet="s_text_block" data-name="Featured Products">
+                    <div class="sz-container"><div class="sz-section-heading"><div><span class="sz-eyebrow">FROM OUR SHELVES TO YOUR BASKET</span><h2>Your everyday favourites.</h2><p>Explore our online selection.</p></div><div class="sz-product-controls o_not_editable" t-if="products"><button type="button" data-sz-prev="1" aria-label="Previous products" aria-controls="suziProducts"><i class="fa fa-angle-left" aria-hidden="true"/></button><button type="button" data-sz-next="1" aria-label="Next products" aria-controls="suziProducts"><i class="fa fa-angle-right" aria-hidden="true"/></button></div></div>
+                        <div t-if="products" id="suziProducts" class="sz-product-carousel o_not_editable" data-sz-carousel="1" tabindex="0" aria-label="Featured products">
+                            <article t-foreach="products" t-as="product" class="sz-product-card">
+                                <a t-att-href="product.website_url" class="sz-product-image"><img t-att-src="'/web/image/product.template/%s/image_1024' % product.id" t-att-alt="product.name" width="400" height="400" loading="lazy" decoding="async"/></a>
+                                <a t-att-href="product.website_url" class="sz-product-name" t-out="product.name"/>
+                                <div class="sz-product-bottom"><t t-set="price" t-value="product_prices[product.id]"/>
+                                    <div t-if="not website.prevent_zero_price_sale or not website.currency_id.is_zero(price['price_reduce'])" class="sz-product-price"><del t-if="price.get('base_price')" t-out="price['base_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/><strong t-out="price['price_reduce']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/></div>
+                                    <span t-else="" class="small">Contact us for pricing</span>
+                                    <a t-att-href="product.website_url" class="sz-product-view" t-att-aria-label="'View %s' % product.name"><i class="fa fa-arrow-right" aria-hidden="true"/></a>
+                                </div>
+                            </article>
+                        </div>
+                        <div t-elif="not can_shop" class="sz-empty"><a href="/web/login?redirect=/shop">Sign in to browse our products.</a></div>
+                        <div t-else="" class="sz-empty"><i class="fa fa-shopping-basket" aria-hidden="true"/><h3>Our online shelves are coming together.</h3><p>Call <a href="tel:+18683777711">377-7711</a> to ask about product availability.</p></div>
+                        <div class="sz-section-end"><a href="/shop" class="btn btn-outline-primary sz-button">Explore all products <i class="fa fa-arrow-right" aria-hidden="true"/></a></div>
+                    </div>
+                </section>
+
+                <section id="sz-about" class="sz-section sz-about-section s_text_image" data-snippet="s_text_image" data-name="About Suzi's">
+                    <div class="sz-container sz-about-grid"><div class="sz-about-image"><img src="/suzi_supermarket_website/static/src/img/hero_groceries_hd.webp" alt="A shopping cart filled with everyday groceries" width="2400" height="2400" loading="lazy" decoding="async"/><div class="sz-about-label"><i class="fa fa-map-marker" aria-hidden="true"/><span>Part of your everyday.<br/><strong>Right here in Valsayn.</strong></span></div></div>
+                        <div class="sz-about-copy"><span class="sz-eyebrow">WELCOME TO SUZI'S</span><h2>A familiar stop.<br/><span>A basket of possibilities.</span></h2><p>At Suzi's Supermarket, everyday shopping is about the things that bring a home together. The pantry staples. The family favourites. The little extras that make someone's day.</p><p>Find us in Valsayn for your next grocery run. We'd love to help you find what you're looking for.</p><ul><li>Groceries and pantry essentials</li><li>Drinks, snacks, and everyday favourites</li><li>Personal care and household needs</li></ul><a href="/contactus" class="btn btn-primary sz-button">Get in touch <i class="fa fa-arrow-right" aria-hidden="true"/></a></div>
+                    </div>
+                </section>
+
+                <section class="sz-visit s_text_block" data-snippet="s_text_block" data-name="Visit Suzi's"><div class="sz-container sz-visit-inner"><div><span class="sz-eyebrow">WE'RE JUST A CALL AWAY</span><h2>Need a hand with your shopping?</h2><p>Ask about products, opening hours, or finding us in Valsayn.</p></div><a href="tel:+18683777711" class="btn sz-button sz-button-light"><i class="fa fa-phone" aria-hidden="true"/> Call 377-7711</a></div></section>
+            </div>
+        </t>
+    </template>
+    <record id="homepage_page" model="website.page">
+        <field name="name">Suzi's Supermarket Home</field>
+        <field name="url">/suzi-home</field>
+        <field name="view_id" ref="homepage"/>
+        <field name="is_published" eval="True"/>
+        <field name="website_meta_title">Suzi's Supermarket | Valsayn, Trinidad</field>
+        <field name="website_meta_description">Your neighbourhood supermarket in Valsayn. Explore groceries, drinks, snacks, personal care and household essentials. Call Suzi's on 377-7711.</field>
+    </record>
+</odoo>
