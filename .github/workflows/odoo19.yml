@@ -30,20 +30,20 @@ jobs:
       - name: Install and exercise native website routes
         run: |
           docker volume create suzi-ci-data
-          docker run --rm --network host \
+          docker run --rm --network host --entrypoint odoo \
             -v "$GITHUB_WORKSPACE:/mnt/extra-addons:ro" \
             -v suzi-ci-data:/var/lib/odoo \
-            odoo:19.0 odoo \
+            odoo:19.0 \
             --db_host=127.0.0.1 --db_port=5432 --db_user=odoo --db_password=odoo \
             -d suzi_ci --init=suzi_supermarket_website --without-demo=all \
             --test-enable --test-tags=/suzi_supermarket_website \
             --stop-after-init --http-interface=127.0.0.1 --log-level=test
       - name: Upgrade and rerun regressions
         run: |
-          docker run --rm --network host \
+          docker run --rm --network host --entrypoint odoo \
             -v "$GITHUB_WORKSPACE:/mnt/extra-addons:ro" \
             -v suzi-ci-data:/var/lib/odoo \
-            odoo:19.0 odoo \
+            odoo:19.0 \
             --db_host=127.0.0.1 --db_port=5432 --db_user=odoo --db_password=odoo \
             -d suzi_ci --update=suzi_supermarket_website \
             --test-enable --test-tags=/suzi_supermarket_website \
