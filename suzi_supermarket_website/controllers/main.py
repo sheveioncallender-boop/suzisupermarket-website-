@@ -8,7 +8,9 @@ class SuziWebsite(http.Controller):
     def home(self, **kwargs):
         website = request.website
         if not website.suzi_branding:
-            return request.not_found()
+            # Return a concrete response: raising 404 invokes Odoo's page
+            # fallback and would serve the editor page at this same URL.
+            return request.not_found().get_response()
         Product = request.env['product.template']
         Category = request.env['product.public.category']
         can_shop = website.has_ecommerce_access()
